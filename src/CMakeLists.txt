@@ -19,6 +19,8 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "^DragonFly?" OR ${CMAKE_SYSTEM_NAME} MATCHES "F
 	target_link_libraries(${PROJECT_NAME} PRIVATE /usr/local/lib/libbotan-3.a)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
 	target_link_libraries(${PROJECT_NAME} PRIVATE /usr/pkg/lib/libbotan-3.a)
+elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../arm64/lib/libbotan-3.a" -static)
 else()
 	#list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
 	#find_package(Botan REQUIRED)
