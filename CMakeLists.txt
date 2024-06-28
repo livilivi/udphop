@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.15.0 FATAL_ERROR)
 
 project(udphop CXX)
-
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_TOOLCHAIN_FILE /workspaces/udphop/toolchain.cmake)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -17,7 +17,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
 	include_directories("/usr/pkg/include/botan-2")
 endif()
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-	include_directories("/usr/include/botan-2")
+	if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
+		include_directories("/workspaces/udphop/arm64/include")
+	else()
+		include_directories("/usr/include/botan-3")
+	endif()
 endif()
 
 find_package(Threads REQUIRED)

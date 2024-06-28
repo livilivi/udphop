@@ -1,0 +1,15 @@
+{
+  "name": "Alpine Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:alpine", 
+  "postCreateCommand": "apk update && apk add --no-cache libstdc++ asio asio-dev botan-libs botan-dev botan3-libs cmake llvm clang lld",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.associations": {
+          "*.cpp": "cpp",
+          "*.hpp": "cpp"
+        }
+      }
+    }
+  }
+}
